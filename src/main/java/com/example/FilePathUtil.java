@@ -1,21 +1,22 @@
 package com.example;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
- * Utility class for file path operations.
- * Intentionally uses hard-coded backslash (Windows only).
+ * Utility class for file path operations, now portable.
  */
 public class FilePathUtil {
 
     /**
-     * Builds a file path by concatenating directory and filename
-     * using a fixed backslash separator.
+     * Builds a file path using Java NIO, which handles separators automatically.
      *
      * @param directory the directory path
      * @param filename  the filename
-     * @return the full path
+     * @return the full path as string
      */
     public static String buildPath(String directory, String filename) {
-        // Cố tình dùng \ (Windows), sẽ gây lỗi trên Linux/macOS khi so với File.separator
-        return directory + "\\" + filename;
+        Path path = Paths.get(directory, filename);
+        return path.toString();
     }
 }
